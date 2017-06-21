@@ -4,6 +4,7 @@
 #include <string>
 #include "keyword.hpp"
 #include "player.hpp"
+#include "game.hpp"
 
 using namespace engine;
 
@@ -15,6 +16,20 @@ bool GameScene::init(){
 bool GameScene::update()
 {    
     Scene::update();
+    bool isWinner = true;
+    for (auto id_obj: m_objects)
+    {
+        auto obj = id_obj.second;
+        if ((dynamic_cast<Enemy*>(obj))){
+        	if(dynamic_cast<Enemy*>(obj)->life > 0){
+        		isWinner = false;
+        	}
+        }
+    }
+
+    if(isWinner){
+    	engine::Game::instance.change_scene("Victory");
+    }
 
     return true;
 }
