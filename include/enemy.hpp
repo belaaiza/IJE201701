@@ -19,22 +19,16 @@ class Player;
 class Enemy : public GameObject {
 public:
     Enemy() : GameObject() {}
-    Enemy(std::string _name,int _x,int _y, Player * target)
-        : GameObject(_name,_x,_y), m_target(target) {}
+    Enemy(std::string _name,int _x,int _y, Player * target, int enemy_life)
+        : GameObject(_name,_x,_y), m_target(target),  life(enemy_life) {}
 
+    int life;
     ~Enemy() {}
-    int life = 100;
     virtual bool init();
     virtual bool shutdown();
     virtual bool update();
     virtual bool draw();
     void causeDamage();
-
-    //bool changeHability(std::string hability_name);
-    //bool changeSprite(std::string sprite);
-    //void addHability(std::string hability_name, Hability Hability);
-    //void addSprite(std::string hability_name, ImageComponent* sprite);
-    //Hability getActiveHability();
     
 private:
     Player* m_target;

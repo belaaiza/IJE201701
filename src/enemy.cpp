@@ -67,10 +67,13 @@ void Enemy::causeDamage(){
 
     if(m_target->life <= 0)
     {
-        //engine::Game::instance.change_scene("Gameover");
+        engine::Game::instance.change_scene("Gameover");
+        physics.position.setX(getInitialX());
+        physics.position.setY(getInitialY());
         m_target->physics.position.setX(m_target->getInitialX());
         m_target->physics.position.setY(m_target->getInitialY());
         m_target->life = 100;
+        life = 100;
 
     }
 }

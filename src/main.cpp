@@ -7,17 +7,14 @@
 #include "components/animation.hpp"
 #include "components/moveDirectionals.hpp"
 #include "components/moveSS.hpp"
-#include "components/follow.hpp"
 #include "components/animationcontroller.hpp"
-#include "components/changeroom.hpp"
-#include "components/fragment.hpp"
-#include "components/pushenemy.hpp"
 #include "components/customimagecomponent.hpp"
 #include "player.hpp"
 #include "gamescene.hpp"
 #include "menuscene.hpp"
 #include "gameover.hpp"
 #include "hability.hpp"
+#include "hudlife_enemy.hpp"
 #include "tilemap.hpp"
 #include "tileset.hpp"
 #include "log.h"
@@ -96,25 +93,30 @@ int main(int, char**)
         x+=100;
     }*/
 
-    Enemy enemy("enemy", 600, 250, &player);
+    Enemy enemy("enemy", 600, 250, &player, 100);
     enemy.xF = 0; enemy.yF = 0;
     ImageComponent enemyImage(enemy, "ghost.png", 4, 4, true);
     enemy.add_component(enemyImage);
 
-    Enemy enemy1("enemy1", 670, 100, &player);
+    Enemy enemy1("enemy1", 670, 100, &player, 100);
     enemy1.xF = 0; enemy1.yF = 0;
     ImageComponent enemyImage1(enemy1, "ghost1.png", 4, 4, true);
     enemy1.add_component(enemyImage1);
 
-    Enemy enemy2("enemy2", 670, 400, &player);
+    Enemy enemy2("enemy2", 670, 400, &player, 100);
     enemy2.xF = 0; enemy2.yF = 0;
     ImageComponent enemyImage2(enemy2, "ghost2.png", 4, 4, true);
     enemy2.add_component(enemyImage2);
 
-    Enemy enemy3("enemy3", 720, 300, &player);
+    Enemy enemy3("enemy3", 720, 300, &player, 100);
     enemy3.xF = 0; enemy3.yF = 0;
     ImageComponent enemyImage3(enemy3, "ghost3.png", 4, 4, true);
     enemy3.add_component(enemyImage3);
+
+    Enemy boss("enemy4", 900, 250, &player, 200);
+    boss.xF = 0; boss.yF = 0;
+    ImageComponent bossImage(boss, "boss.png", 4, 2, true);
+    boss.add_component(bossImage);
 
     HUDInstrument HUDInstrument("hudinstrument", globals::window_size.first-250, globals::window_size.second-120, &player);
     HUDInstrument.xF = 0; HUDInstrument.yF = 0;
@@ -149,6 +151,7 @@ int main(int, char**)
     room1.add_game_object(enemy1);
     room1.add_game_object(enemy2);
     room1.add_game_object(enemy3);
+    room1.add_game_object(boss);
     room1.add_game_object(player);
 
     GameObject playbutton("playbutton",(globals::window_size.first/2)-50,(globals::window_size.second/2)-50);
